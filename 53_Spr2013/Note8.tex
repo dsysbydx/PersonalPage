@@ -1,0 +1,149 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+\renewcommand{\v}{\vec{v}}
+\newcommand{\vecx}{\vec{\mathbf{x}}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+\renewcommand{\Vec}[2]{\l[ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular} \r]}
+\newcommand{\Mat}[4]{\l[ \begin{tabular}{cc} $#1$ &$#2$ \\ $#3$ &$#4$ \end{tabular} \r]}
+
+\title{MATH 53 Note: 04/25/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+\section{Solving $\vecx'(t) = A\vecx(t)$: An Introduction}
+
+\ni Our next topic is a system of linear ODEs with constant coefficient, i.e. a system of ODEs of the form
+$$ x'(t) = ax(t)+by(t), \quad y'(t) = cx(t)+dy(t) $$
+By letting $\vecx = \Vec{x'(t)}{y'(t)}$, one can write this equation in a vector form,
+$$ \vecx'(t) = A\vecx(t), \quad A = \Mat{a}{b}{c}{d} $$
+First, observe that
+$$ \text{If  }\vecx_{1}(t),\vecx_{2}(t)  \text{ are solutions, then } C_{1}\vecx_{1}(t)+C_{2}\vecx_{2}(t) \text{ is a solution for any constant }C_{1},C_{2} $$
+In other words, any linear combination of two solutions is also a solution. Our strategy for solving $\vecx'(t) = A\vecx(t)$ is as follows;
+
+\begin{itemize}
+	\item First, we look for two ``independent'' solutions, called them $ \vecx_{1}(t),\vecx_{2}(t)$.
+	\item Form a general solutions by taking a linear combination of those two solutions, that is, the general solution is
+	$$  C_{1}\vecx_{1}(t)+C_{2}\vecx_{2}(t)  $$
+	\item Plug in the initial condition (if given) to find $C_{1},C_{2}$. 
+\end{itemize}
+The recipe for finding two solutions will depend on eigenvalues of matrix $A$, which can be divided into three cases;
+\begin{itemize}
+	\item $A$ has two different real eigenvalues $\lambda_{1} \neq \lambda_{2}$
+	\item $A$ has repeated eigenvalues $\lambda_{1}=\lambda_{2}$
+	\item $A$ has complex eigenvalues $\lambda_{1} = \alpha+\beta i , \lambda_{2}= \alpha-\beta i $
+\end{itemize}
+
+So before we begins tackling each cases, first let's go back and answer some questions that might arise. Why do we need two (independent) solutions? The intuitive explanation is that we are solving two dimensional problem. In order to have a general enough solution that we can guarantee to match the given initial conditions, we need two free parameters. The next question is why two is enough? The intuitive explanation is again because we are trying to match two initial condition $x(0),y(0)$ ( or may be at other $t_{0}$). By having two free parameters $C_{1},C_{2}$, then we can always solve for $C_{1},C_{2}$ that will match the given initial conditions, assuming the solution is ``independent'' (we will see what this means when we discuss Wronkian).
+
+Let's illustrate this through an example. 
+
+\ni\textbf{Example. } Consider a system of ODEs
+$$ x'(t) = 3x(t)-2y(t), \quad y'(t) = 2x(t)-2y(t), \quad x(0) = 1, y(0) = 1$$
+By simply plugging in, one can verify that 
+$$ \vecx_{1}(t) = \Vec{e^{-t}}{2e^{-t}}$$
+is a solution. From this, we get any multiple of it is also a solution, i.e.
+$$ C\Vec{e^{-t}}{2e^{-t}}$$
+is also a solution. But we cannot find $C$ that solve initial-valued problem. To see that, we plug in $t=0$ to get
+$$ C\Vec{1}{2} = \Vec{x(0)}{y(0)} = \Vec{1}{1} \imply C = 1, 2C = 1$$
+which is impossible, so there is no such $C$. That is, there is no solution of this form. Suppose we find another solution,
+$$ \vecx_{2}(t) = \Vec{2e^{2t}}{e^{2t}}$$
+Then we have that any thing of the form
+$$ \vecx(t) = C_{1}\vecx_{1}(t)+C_{2}\vecx_{2}(t) = C_{1}\Vec{e^{-t}}{2e^{-t}}+C_{2} \Vec{2e^{2t}}{e^{2t}}$$
+is also a solution. Now we can try to solve for $C_{1},C_{2}$ that will satisfies the IVP. By plugging in $t=0$, we get
+$$ C_{1}\Vec{1}{2}+C_{2}\Vec{2}{1} = \Vec{0}{0} \imply \Vec{C_{1}+2C_{2}}{2C_{1}+C_{2}} = \Vec{0}{0} \imply C_{1}=C_{2}=1/3$$
+That is, 
+$$ \frac{1}{3}\Vec{e^{-t}}{2e^{-t}}+\frac{1}{3} \Vec{2e^{2t}}{e^{2t}} = \Vec{ \frac{1}{3}e^{-t}+\frac{2}{3}e^{2t}}{\frac{2}{3}e^{-t}+\frac{1}{3}e^{2t}}$$
+is a solution to the initial-valued problem.
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  

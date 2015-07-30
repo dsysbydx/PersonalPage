@@ -1,0 +1,195 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+\renewcommand{\v}{\vec{\mathbf{v}}}
+\newcommand{\w}{\vec{\mathbf{w}}}
+\newcommand{\x}{\vec{\mathbf{x}}}
+\newcommand{\X}{\mathbf{X}}
+\renewcommand{\b}{\vec{\mathbf{b}}}
+
+\newcommand{\vb}[1]{\vec{\textbf{#1}}}
+\newcommand{\vecx}{\vec{\mathbf{x}}}
+\newcommand{\hx}{\hat{\mathbf{x}}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\TwoLine}[2]{ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular}}
+\newcommand{\ThreeLine}[3]{ \begin{tabular}{c} $#1$ \\ $#2$ \\ $#3$ \end{tabular}}
+\renewcommand{\Vec}[2]{\l[ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular} \r]}
+\newcommand{\Mat}[4]{\l[ \begin{tabular}{cc} $#1$ &$#2$ \\ $#3$ &$#4$ \end{tabular} \r]}
+
+\title{MATH 53 Note: 05/16/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+
+\section{Second order linear ODE with constant coefficients: inhomogeneous}
+In this note, we will discuss how to solve an equation of the form
+$$ ay''(t)+by'(t)+cy(t) = g(t) $$
+when $g(t) \neq 0$. To solve this equation, we do the following
+\begin{enumerate}
+	\item Solve the homogeneous equation to get two fundamental solutions $y_{1}(t),y_{2}(t)$
+	\item Find a particular solution $y_{p}(t)$ of the original inhomogeneous equation.
+	\item The general solution is simply $y_{p}(t)+C_{1}y_{1}(t)+C_{2}y_{2}(t)$.
+	\item Find $y'(t)$ if need to, then plugging in the initial condition to find $C_{1},C_{2}$
+\end{enumerate} 
+
+The first step is discussed in the previous note. To find a particular solution, we will use what is called the method of undetermined coefficients. It just means that we will guess the form of $y_{p}(t)$ (particular solution). The idea is to get the form of $y_{p}(t)$ to be the same as $g(t)$. For example
+
+\begin{center}
+\begin{tabular}{c | c}
+	 $g(t)$  &$y_{p}(t)$  \\
+	 \hline 
+	 $3t^{2}+1$	&$At^{2}+Bt+C$  \\
+	 $t $			&$At+B$ \\
+	$\cos 2t$		&$A\cos t + B\sin t$ \\
+	$ e^{-3t}$		&$Ae^{-3t}$
+\end{tabular}
+\end{center}
+
+See page 272 for more detail. The problem will arise if one of the term in our guess is a solution to the homogeneous one since it will be zero when plugging in to the ODE. It turns out that we can get around that by multiplying the guessed form by $t$. If that form still contains the solution (could happen in the case of repeated root), then we will need to multiply by $t^{2}$ instead. After guessing the form, then we need to plug it in to determine all the coefficients.
+
+
+\vspace{0.2in}
+\begin{example} Find general solution of $y'' +5y' +6y = 3t^{2}+1$
+\end{example}
+
+\Sol the characteristic equation is
+$$\ld^{2}+5\ld+6 = 0 \imply (\ld+3)(\ld+2) = 0 \imply \ld = -2,-3 $$
+The general solution to the homogeneous is then given by
+$$ y(t) = C_{1}e^{-2t}+C_{2}e^{-3t} $$
+Now we find a particular solution of the form (because $g(t) = 3t^{2}+1$)
+$$ y_{p}(t) = At^{2}+Bt+C $$
+We plug it back to our inhomogeneous equation to find $A,B,C$,
+$$ \TwoLine{y'(t) = 2At+B}{y''(t) = 2A} \imply 3t^{2}+1 = y''+5y'+6y = 2A+5(2tA+B)+6(At^{2}+Bt+C) = 6At^{2}+(10A+6B)t + 2A+5B+6C $$
+So
+$$ \ThreeLine{6A = 3}{10A+6B = 0}{2A+5B+6C = 1} \imply \ThreeLine{A=1/2}{B=-5/6}{C=25/36} $$ 
+So
+$$y_{p}(t) = \frac{t^{2}}{2}-\frac{5t}{6}+\frac{25}{36} $$
+The general solution is then given by
+$$ y(t) =  \frac{t^{2}}{2}-\frac{5t}{6}+\frac{25}{36}  +  C_{1}e^{-2t}+C_{2}e^{-3t}  $$
+
+\vspace{0.2in}
+\begin{example} Find general solution of $y'' +4y = \cos 3t$
+\end{example}
+
+\Sol the characteristic equation is
+$$\ld^{2}+4 = 0 \imply \ld = \pm 2i $$
+The general solution to the homogeneous is then given by
+$$ y(t) = C_{1}\cos 2t+C_{2}\sin 2t $$
+Now we find a particular solution of the form (because $g(t) =\cos 3t$)
+$$ y_{p}(t) = A\cos 3t + B\sin 3t $$
+We plug it back to our inhomogeneous equation to find $A,B,C$,
+$$ \TwoLine{y'(t) = -3A\sin 3t +3 B\cos 3t}{y''(t) = -9A\cos 3t -9B\sin 3t} $$
+So
+ $$\cos 3t = y''+4y = -9A\cos 3t -9B\sin 3t+4(A\cos 3t +B\sin 3t) = -5A\cos 3t -5B\sin 3t$$
+Then we get
+$$ \TwoLine{-5A = 1}{-5B=0} \imply \TwoLine{A=-1/5}{B=0} $$ 
+So
+$$y_{p}(t) = -\frac{\cos 3t}{5} $$
+The general solution is then given by
+$$ y(t) = -\frac{\cos 3t}{5} +  C_{1}\cos 2t+C_{2}\sin 2t  $$
+
+\vspace{0.2in}
+\begin{example} Find general solution of $y'' +3y'+2y = 2e^{-t}$
+\end{example}
+
+\Sol  the characteristic equation is
+$$\ld^{2}+3\ld +2 = 0 \imply (\ld+2)(\ld+1) = 0 \imply \ld = -1,-2 $$
+The general solution to the homogeneous is then given by
+$$ y_{hom}(t) = C_{1}e^{-t}+C_{2}e^{-2t} $$
+Now we find a particular solution of the form (because $g(t) = 2e^{-t}$)
+$$ y_{p}(t) =Ae^{-t} $$
+But this won't work since $e^{-t}$ is a solution. If we plug this in, we will simply get zero and we cannot find $A$ that will make it equal to $g(t)$. So we multiply by $t$ and use
+$$ y_{p}(t) = Ate^{-t} $$
+We plug it back to our inhomogeneous equation to find $A$,
+$$ \TwoLine{y'(t) = A(e^{-t}-te^{-t})}{y''(t) = A(te^{-t}-2e^{-t})} \imply 2e^{-t} = y''+3y'+2y = A(te^{-t}-2e^{-t})+3 A(e^{-t}-te^{-t}) +2Ate^{-t} = Ae^{-t} $$
+So $A=2$ and we get
+$$y_{p}(t) = 2te^{-t} $$
+The general solution is then given by
+$$ y(t) =  2te^{-t}  +  C_{1}e^{-t}+C_{2}e^{-2t}  $$
+
+
+
+
+
+\end{document}  

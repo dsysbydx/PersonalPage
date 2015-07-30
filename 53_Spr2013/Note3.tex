@@ -1,0 +1,178 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+
+\title{MATH 53 Note: 04/09/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+\section{Linear first order ODE with variable coefficient}
+
+\ni We would like to solve
+$$ u'(t) + a(t)u(t) = b(t) $$
+We have seen the case when $a(t) = a$ in the previous note. The technique is the same for the general case when $a(t)$ is any function of $t$. That is, we are looking for the integration factor that will help us group things on the LHS using product rule. You can easily see by verification that the integration factor for this ODE is simply
+$$ v(t) = e^{\int a(t) dt} $$
+
+
+\begin{example} Solve $u'(t) + 2tu(t) = 2t e^{-t^{2}}$
+The integration factor is
+$$ e^{\int 2t dt } = e^{t^{2}} $$
+Multiply by the integration factor gives
+$$ \l(e^{t^{2}}u(t)\r)' = 2t $$
+Taking the integral both side,
+$$ e^{t^{2}}u(t) = t^{2}+C \imply u(t) = t^{2}e^{-t^{2}}+Ce^{-t^{2}} $$
+Plugging in the initial $u(0) = 5$ gives $C = 5$, so the solution is
+$$ u(t) = t^{2}e^{-t^{2}}+5e^{-t^{2}} $$
+\end{example}
+
+
+\begin{example} Solve $ty'(t) - 2y(t) = \sin t,  t>0$
+First step is to divide the ODE by $t$, so that it's in the form given above with 
+$$ a(t) = \frac{1}{t}, \quad b(t) = \frac{\sin t}{t} $$
+The integration factor is
+$$ e^{\int -\frac{2}{t} dt } = e^{2\ln t} = (e^{\ln t})^{2} = t^{2} $$
+Multiply by the integration factor gives
+$$ \l(t^{2}u(t)\r)' = t \sin t $$
+Taking the integral both side,
+$$ t^{2}u(t) = \int t \sin t dt + C $$
+Using integration by part, we can compute (try this yourself)the integral on the RHS,
+$$ \int t\sin t dt = -t \cos t + \sin t + C $$
+Thus,
+$$ t^{2}u(t) =  -t \cos t + \sin t + C \imply u(t) = - \frac{\cos t}{t} + \frac{\sin t}{t^{2}} + \frac{C}{t^{2}} $$
+
+\end{example} 
+
+\section{ Separable Equation}
+
+\ni The separable equation is an equation for the form 
+$$ M(t) + N(y)y'(t) = 0 $$
+Informal way to write this equation is
+$$ M(t) + N(y)\frac{dy}{dt} = 0 \quad \Rightarrow \quad N(y)dy = - M(t)dt $$
+hence the name separable [observe the LHS has no $t$ (except through function $y$)]. The way to solve this is to use \textit{substitution}.  Integrating both sides with respect to $t$ and use substitution to change from variable $t$ to $y$ in the second integral, 
+$$ \int M(t) dt + \int N(y)y'(t)dt = C \quad \Rightarrow \quad \int M(t)dt  + \int N(y)dy = C $$
+Then you can solve for $y$. The way to remember how this works is to use
+$$ N(y) dy = - M(t) dt $$
+Integrating both side, we get
+$$ \int N(y) dy = \int -M(t) dt + C $$
+
+\begin{example} $y' = (1-2t) y^{2}, y(0) = -1/6$.
+\end{example}
+
+\begin{example} $y' =3y(y-2), y(0) = 3$
+$$\frac{1}{y(y-2)}y' = 3 $$
+so
+$$ \int \frac{1}{y(y-2)}dy = 3t+C $$
+Using partial fraction, one writes
+$$ \frac{1}{y(y-2)} = \frac{A}{y} + \frac{B}{y-2} \imply A = -1/2, B=1/2 $$
+so 
+$$ \int \frac{1}{y(y-2)}dy = -\frac{1}{2} \int \l( \frac{1}{y} - \frac{1}{y-2} \r)dy = - \frac{1}{2}( \ln y - \ln (y-2) )= \frac{1}{2} \ln \l( \frac{y-2}{y} \r) $$
+Thus,
+$$  \frac{1}{2} \ln \l( \frac{y-2}{y} \r)  = 3t + C \imply \frac{y-2}{y} = e^{6t}e^{2C} = C_{1}e^{6t} $$
+Hence,
+$$ y = \frac{2}{1-C_{1}e^{6t}} $$
+Plugging in the initial condition, we get
+$$ 3 = y(0) = \frac{2}{1-C_{1}} \imply C_{1} = \frac{1}{3} $$
+So the solution is
+$$ y(t) = \frac{2}{1-\frac{1}{3}e^{6t}} $$
+
+
+\end{example}
+
+\section{Recap}
+
+So far we have solved two kind of ODE (linear first order and separable). Let's look at some examples to identify which one falls into one of those two kind that we know how to solve and which one does not.
+
+\begin{example} Identify if these equations are linear first order ODE and/or separable. 
+\begin{enumerate}
+\item $u'=tu$
+\item $u' =tu+1$
+\item$u' =  tu(u-2)$
+\item$u' = tu(u-2) + 1$
+\item$u' =( t+1)(u(u-2)+1)$
+\end{enumerate}
+(1) is linear ODE and separable, (2) is linear ODE but not separable. (3) is non-linear but separable. (4) is neither linear nor separable. (5) is non-linear but separable. 
+\end{example} 
+
+
+ 
+
+
+
+
+
+
+\end{document}  

@@ -1,0 +1,125 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+
+\title{MATH 53 Note: 04/02/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+
+\noindent What is ODE? ODE stands for ordinary differential equation which simply means an equation that involves derivatives. Ordinary means that the function involves is a single-variable function, so the notion of derivative you will see is just ordinary derivative and not partial derivative you might have seen from multi-variable function.  The goal for this class is simply to find a solution of ODE, i.e. to find a function that satisfies a given equation involving derivative.
+ 
+ 
+\begin{example} $u'(t) = 5u(t)$. You can verify directly that $u(t) = e^{5t}$ satisfies the given ODE, but so does $u(t) = 2e^{5t}, u(t) = 4e^{5t}$. In fact, $u(t) = Ce^{5t}$ is a solution for any constant $C$. Suppose now that we want the solution such that $u(0) = 2$. That is, our problem is to find $u$ such that
+$$ u'(t) = 5u(t), \quad u(0) = 2 $$
+Then one gets that the only solution is (we will talk about how to solve this later) 
+$$ u(t) = 2e^{5t} $$
+Information about $u$ at some specific time $t_{0}$ (in this case $t_{0}=0$) is called \textbf{initial condition} or \tf{boundary condition}
+\end{example}
+
+\ni\tf{Order of equation} is the highest order of derivative that appears in the ODE. 
+
+\begin{example} 1) $u'''(t) - u'(t) = 0$ is a third order ODE \\
+2) $u''(t) - 5u'(t) + 2u(t) = 0$ is a second order ODE \\
+3) $u'(t) + (3t^{2}+4)u(t) = 5t$ is a first order ODE 
+\end{example}
+
+From what I have observed TAing this class in the past year is that most students understand how to solve the ODE clearly, but often having trouble carrying out the procedure which mostly involves taking integral. To do well in this class, I highly recommend you to review basic derivative and integral. This is not a complete list but hopefully it will cover most of what you will see in this class.
+
+\vspace{0.2in}
+\begin{tabular}{| c| c|}
+\hline
+Derivative & Integral \\
+\hline
+$ \frac{dt^{n}}{dt} = nt^{n-1}$		&$ \int t^{n} dt = \frac{t^{n+1}}{n+1} + C $ \\
+$ \frac{de^{at}}{dt} = ae^{at}$		&$\int e^{at}dt = \frac{1}{a} e^{at} +C $ \\
+$ \frac{d\ln t}{dt} = \frac{1}{t}$		&$\int \frac{1}{t} dt = \ln |t| + C$ \\
+$ \frac{d \sin t}{dt} = \cos t$		&$\int \cos t dt  = \sin t $ \\
+$ \frac{d \cos t}{dt} = -\sin t$		&$\int \sin t dt = -\cos t $ \\
+$ \frac{d \tan t}{dt} = \frac{1}{1+t^{2}}$ &$\int \frac{1}{1+t^{2}}dt = \tan t$ \\
+\hline
+\end{tabular}
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  

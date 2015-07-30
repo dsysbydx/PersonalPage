@@ -1,0 +1,174 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+
+\title{MATH 53 Note: 04/18/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+\section{Exact equation with integrating factor}
+
+\ni Given a first order ODE 
+$$ M(x,y)+N(x,y)y' = 0$$
+Suppose that it's not exact, i.e.
+$$ M_{y} \neq N_{x} $$
+Our goal is to try to manipulate this ODE so that it becomes exact. Let's see when that's possible. We will use the same method we did earlier for first order linear ODE by multiplying by a function. Denote a function we will multiply to our ODE by $\mu(x)$, then our ODE becomes
+$$ \tdM(x,y) + \tdN(x,y) y' = 0 $$
+where
+$$ \tdM(x,y) = \mu(x)M(x,y), \quad \tdN(x,y) = \mu(x)N(x,y) $$
+Then the condition for new ODE to be exact is
+$$ \tdM_{y} = \tdN_{x} \imply \mu M_{y} = \mu N_{x}+\mu' N \imply \frac{\mu'(x)}{\mu(x)} = \frac{M_{y}(x,y)-N_{x}(x,y)}{N(x,y)} $$
+Since we restrict ourselves to an integrating factor which is a function of $x$, this will only work if when computing the right hand side, all the $y$, if there is any, cancels out and you are left with a function of $x$ only. Then we need to solve for $\mu$ by the same way we did with first order linear ODE, that is, we want $\mu$ such that
+$$ \mu'(x) = \mu(x)a(x) \text{ where }a(x) = \frac{M_{y}(x,y)-N_{x}(x,y)}{N(x,y)}  $$
+which gives
+$$ \mu(x) = e^{\int a(x) dx} $$
+After multiplying by $a(x)$, the ODE becomes exact and we can solve it. Let's see some examples
+
+\vspace{0.2in}
+\bex Solve  
+$$y' = e^{2x}+y - 1 $$
+\eex
+
+\Sol Note that $M(x,y) = 1-y-e^{2x}, N(x,y) = 1$, so that
+$$ \frac{M_{y}-N_{x}}{N} = {-1-0}{1} = -1 =: a(x) $$
+so the integrating factor is
+$$ \mu(x) = e^{\int a(x)dx} = e^{-x} $$
+Multiply by $e^{-x}$ gives
+$$ e^{-x}(1-y-e^{2x})+ e^{-x}y' = 0 $$
+This is exact, now we need to find $H(x,y)$ such that
+$$ H_{x}(x,y) = \tdM(x,y) = e^{-x}(1-y-e^{2x}) $$
+$$ H_{y}(x,y) = \tdN(x,y) = e^{-x} $$
+Using the second condition, 
+$$ H(x,y) = e^{-x}y + C(x) $$
+Next, taking partial derivative with respect to $x$ to match with the second condition,
+$$ H_{x}(x,y) = -e^{-x}y + C'(x)  = e^{-x}(1-y-e^{2x}) $$
+so
+$$ C'(x) = e^{-x}-e^{x} \imply C(x) = -e^{-x}-e^{x} $$
+Thus, 
+$$H(x,y) =  e^{-x}y -e^{-x}-e^{x}  $$
+The solution is then
+$$  e^{-x}y -e^{-x}-e^{x} = C \imply y = \frac{e^{-x}+e^{x}}{e^{-x}} = 1+e^{2x} $$
+
+\vspace{0.2in}
+\bex Solve 
+$$(x+2)\sin y +( x \cos y) y' = 0,\quad  y(1) = \frac{\pi}{2} $$
+\eex
+\Sol Note that $M(x,y) = (x+2)\sin y, N(x,y) =x \cos y$, so that
+$$ \frac{M_{y}-N_{x}}{N} = {(x+2)\cos y - \cos y}{x\cos y } = \frac{x+1}{x} = 1+\frac{1}{x} =: a(x) $$
+so the integrating factor is
+$$ \mu(x) = e^{\int a(x)dx} = e^{x + \ln x} = xe^{x} $$
+Multiply by $xe^{x}$ gives
+$$ xe^{x}(x+2)\sin y+ x^{2}e^{x}\cos y y' = 0 $$
+This is exact, now we need to find $H(x,y)$ such that
+$$ H_{x}(x,y) = \tdM(x,y) = xe^{x}(x+2)\sin y $$
+$$ H_{y}(x,y) = \tdN(x,y) = x^{2}e^{x}\cos y $$
+Using the second condition, 
+$$ H(x,y) =  x^{2}e^{x}\sin y + C(x) $$
+Next, taking partial derivative with respect to $x$ to match with the second condition,
+$$ H_{x}(x,y) = (x^{2}+2x)e^{x}\sin y  + C'(x)  =  xe^{x}(x+2)\sin y $$
+so
+$$ C'(x) =0 \imply C(x) = 0 $$
+Thus, 
+$$H(x,y) = x^{2}e^{x}\sin y  $$
+The solution is then
+$$   x^{2}e^{x}\sin y = C $$
+Plugging in initial condition yields
+$$ 1\cdot e \cdot \sin(\frac{\pi}{2}) = C \imply C = e $$
+so the solution to initial valued problem is
+$$ x^{2}e^{x}\sin y = e \imply y = \text{arcsin }\frac{e^{1-x}}{x^{2}} $$
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  

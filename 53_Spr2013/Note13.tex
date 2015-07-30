@@ -1,0 +1,178 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+\renewcommand{\v}{\vec{\mathbf{v}}}
+\newcommand{\w}{\vec{\mathbf{w}}}
+\newcommand{\x}{\vec{\mathbf{x}}}
+\newcommand{\X}{\mathbf{X}}
+\renewcommand{\b}{\vec{\mathbf{b}}}
+
+\newcommand{\vb}[1]{\vec{\textbf{#1}}}
+\newcommand{\vecx}{\vec{\mathbf{x}}}
+\newcommand{\hx}{\hat{\mathbf{x}}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\TwoLine}[2]{ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular}}
+\renewcommand{\Vec}[2]{\l[ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular} \r]}
+\newcommand{\Mat}[4]{\l[ \begin{tabular}{cc} $#1$ &$#2$ \\ $#3$ &$#4$ \end{tabular} \r]}
+
+\title{MATH 53 Note: 05/14/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+
+\section{Second order linear ODE with constant coefficients: homogeneous}
+In this note, we will discuss how to solve an equation of the form
+$$ ay''(t)+by'(t)+cy(t) = 0 $$
+Note that this can be turned into the system of ODE by letting
+$$ \x(t) = \Vec{y(t)}{y'(t)} $$
+Then
+$$ \x'(t) = \Mat{0}{1}{-c/a}{-b/a} \x(t) $$
+So we can see the solution $y(t)$ should take the form $e^{\ld t}$. By plugging that in and solve for $\ld$, we can find solutions to the second order ODE as follows;
+\begin{enumerate}
+	\item Find the roots of characteristic equation $a\ld^{2}+b\ld + c = 0$ 
+	\item The roots fall into one of the three cases;
+	\begin{itemize}
+		\item $\ld_{1}\neq \ld_{2}$ and are both real. Then the general solution is
+		$$ y(t) = C_{1}e^{\ld_{1} t}+C_{2}e^{\ld_{2}t} $$
+		\item $\ld_1 = \alpha+\beta i, \ld_{2} = \alpha-\beta i$. The general solution is
+		$$ y(t) = C_{1}e^{\alpha t}\cos \beta t + C_{2}e^{\alpha t}\sin \beta t $$
+		\item $\ld_{1} = \ld_{2} = \ld $ (must be real). The general solution is
+		$$ y(t) = C_{1}e^{\ld t}+C_{2}te^{\ld t} $$
+	\end{itemize}
+	\item Find $y'(t)$ if the initial condition involves $y'(t_{0})$.
+	\item Plugging in initial conditions to find $C_{1},C_{2}$
+\end{enumerate}
+
+\vspace{0.2in}
+\begin{example} Solve $y'' - 5y' +6y = 0$ with initial condition $y(0) =1 , y'(0) =1 $
+\end{example}
+
+\Sol the characteristic equation is
+$$\ld^{2}-5\ld+6 = 0 \imply (\ld-3)(\ld-2) = 0 \imply \ld = 2,3 $$
+The general solution is then given by
+$$ y(t) = C_{1}e^{2t}+C_{2}e^{3t} $$
+We first find its derivative so we can plug in the initial condition,
+$$ y'(t) = 2C_{1}e^{2t}+3C_{2}e^{3t} $$
+Plugging in $t=0$ to both $y(t),y'(t)$, 
+$$ \TwoLine{C_{1}+C_{2} = 1 }{2C_{1}+3C_{2}= 1} \imply C_{1}=2,C_{2}= -1$$
+So the solution to the IVP is
+$$ y(t) = 2e^{2t}-e^{3t} $$ 
+
+\vspace{0.2in}
+\begin{example} Solve $y'' - 4y' +5y = 0$ with initial condition $y(0) =3 , y'(0) = 2$
+\end{example}
+
+\Sol the characteristic equation is
+$$\ld^{2}-4\ld+5 = 0 \imply (\ld-2)^{2} = -1 \imply \ld = 2\pm i $$
+The general solution is then given by
+$$ y(t) = C_{1}e^{2t}\cos t+C_{2}e^{2t} \sin t$$
+We first find its derivative so we can plug in the initial condition,
+$$ y'(t) = 2C_{1}e^{2t}\cos t-C_{1}e^{2t}\sin t+ 2C_{2}e^{2t} \sin t +C_{2}e^{2t} \cos t $$
+Plugging in $t=0$ to both $y(t),y'(t)$, 
+$$ \TwoLine{C_{1} = 3 }{2C_{1}+C_{2}= 2} \imply C_{1}=3,C_{2}= -4$$
+So the solution to the IVP is
+$$ y(t) =3e^{2t}\cos t-4e^{2t} \sin t$$ 
+
+\vspace{0.2in}
+\begin{example} Solve $y'' +6y' +9y = 0$ with initial condition $y(0) = 2 , y'(0) = -5 $
+\end{example}
+
+\Sol the characteristic equation is
+$$\ld^{2}+6\ld+9 = 0 \imply (\ld+3)^{2} = 0 \imply \ld = -3 $$
+The general solution is then given by
+$$ y(t) = C_{1}e^{-3t}+C_{2}te^{-3t} $$
+We first find its derivative so we can plug in the initial condition,
+$$ y'(t) = -3C_{1}e^{2t}-3C_{2}te^{-3t}+C_{2}e^{-3t} $$
+Plugging in $t=0$ to both $y(t),y'(t)$, 
+$$ \TwoLine{C_{1} = 2}{-3C_{1}+C_{2}= -5} \imply C_{1}=2,C_{2}= 1$$
+So the solution to the IVP is
+$$ y(t) = 2e^{-3t}+te^{-3t} $$
+
+
+
+
+
+
+
+\end{document}  

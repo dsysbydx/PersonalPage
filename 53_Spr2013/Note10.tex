@@ -1,0 +1,175 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+\renewcommand{\v}{\vec{v}}
+\newcommand{\vx}{\vec{\mathbf{x}}}
+
+\newcommand{\vb}[1]{\vec{\textbf{#1}}}
+\newcommand{\vecx}{\vec{\mathbf{x}}}
+\newcommand{\hx}{\hat{\mathbf{x}}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+\renewcommand{\Vec}[2]{\l[ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular} \r]}
+\newcommand{\Mat}[4]{\l[ \begin{tabular}{cc} $#1$ &$#2$ \\ $#3$ &$#4$ \end{tabular} \r]}
+
+\title{MATH 53 Note: 04/30/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+\section{Solving $\vecx'(t) = A\vecx(t)$}
+
+Recall that our strategy for solving $\vecx'(t) = A\vecx(t)$ is as follows;
+
+\begin{itemize}
+	\item First, we look for two ``independent'' solutions, called them $ \vecx_{1}(t),\vecx_{2}(t)$.
+	\item Form a general solutions by taking a linear combination of those two solutions, that is, the general solution is
+	$$  C_{1}\vecx_{1}(t)+C_{2}\vecx_{2}(t)  $$
+	\item Plug in the initial condition (if given) to find $C_{1},C_{2}$. 
+\end{itemize}
+
+When $A$ has two real and different eigenvalues, finding two solutions is straightforward (see previous note). In this note, we will cover the second case when the eigenvalues are different but are complex. An extra step is required to find two independent solutions.
+
+\section{Case II: two complex eigenvalues $\ld_{1} = \alpha+\beta i,  \ld_{2} = \alpha-\beta i$}
+Let $\v_{1},\v_{2}$ be eigenvectors corresponding to eigenvalues $\ld_{1},\ld_{2}$ respectively. Suppose $\v_{1} = \Vec{a+bi}{c+di}$, then we get (check this yourself!) that $\v_{2} = \Vec{a-bi}{c-di}$. In other words, $\v_{2}$ is simply a conjugate of $\v_{1}$. By allowing all coefficients to be complex number, we have found two solutions
+$$ \hx_{1}(t) = e^{(\alpha+\beta i)t} \Vec{a+bi}{c+di} \quad \hx_{2}(t) = e^{(\alpha-\beta i)t} \Vec{a-bi}{c-di} $$
+However, our goal is to find real-valued solution, so we need to see how we can use these two complex-valued solutions to find two real-valued solution. Note that the second solution is simply the conjugate of the first solution. By using the famous Euler's formula, which states that
+$$ e^{\theta i } = \cos \theta + i \sin \theta $$.
+Using this formula we can write
+$$  \hx_{1}(t) = e^{(\alpha+\beta i)t} \Vec{a+bi}{c+di}  = e^{\alpha t}e^{-i\beta t} \Vec{a+bi}{c+di} = e^{\alpha t}(\cos \beta t + i \sin \beta t) \Vec{a+bi}{c+di}  $$
+$$ = e^{\alpha t} \Vec{a \cos \beta t - b\sin \beta t+i(b \cos \beta t + a \sin \beta t)}{c \cos \beta t - d\sin \beta t+i(d \cos \beta t + c \sin \beta t)}  $$
+$$ = e^{\alpha t}\Vec{a \cos \beta t - b\sin \beta t}{c \cos \beta t - d\sin \beta t} +i e^{\alpha t} \Vec{b \cos \beta t + a \sin \beta t}{d \cos \beta t + c \sin \beta t} $$
+I claim that the real part and imaginary part of $\hx_{1}(t)$,
+$$ \vb{u}(t) = e^{\alpha t}\Vec{a \cos \beta t - b\sin \beta t}{c \cos \beta t - d\sin \beta t}, \quad \vb{w}(t) = e^{\alpha t} \Vec{b \cos \beta t + a \sin \beta t}{d \cos \beta t + c \sin \beta t}  $$
+gives us two real-valued solutions. To see that, we need the help of our second complex-valued solution. Note that by the same computation, just replace $i$ by $-i$, one get
+$$ \hx_{2}(t) =  e^{\alpha t}\Vec{a \cos \beta t - b\sin \beta t}{c \cos \beta t - d\sin \beta t} -i e^{\alpha t} \Vec{b \cos \beta t + a \sin \beta t}{d \cos \beta t + c \sin \beta t} $$
+Recall that any linear combination of solutions is a solution (only for linear equation like the one we are solving), therefore, 
+$$ \vb{u}(t) = \frac{\hx_{1}(t)+\hx_{2}(t)}{2},\quad \vb{w}(t) =  \frac{\hx_{1}(t)-\hx_{2}(t)}{2i}  $$
+are both solutions. Computing those two function, we get
+$$ \vb{u}(t) =   e^{\alpha t}\Vec{a \cos \beta t - b\sin \beta t}{c \cos \beta t - d\sin \beta t}, \quad \vb{w}(t)  = e^{\alpha t} \Vec{b \cos \beta t + a \sin \beta t}{d \cos \beta t + c \sin \beta t} $$
+are both REAL-valued solutions. So we have found two real-valued solutions as desired. Now that we have two solutions, the rest follows in the same way; write out general solution, find constant.  
+
+\ni\tf{Summary.} To solve the complex eigenvalues case, we do the following
+\begin{itemize}
+	\item After computing the eigenvalues of $A$ and get that $\ld_{1} = \alpha+\beta i,  \ld_{2} = \alpha-\beta i$, we take one the eigenvalues and get a complex-valued solution $e^{(\alpha+\beta i) t}\Vec{a+bi}{c+di} $
+	\item Use Euler's formula to replace $e^{i\beta t}$ by $\cos \beta t + i \sin \beta t$
+	\item Expand everything out and separate the real and imaginary part, i.e. write 
+	$$ e^{(\alpha+\beta i) t}\Vec{a+bi}{c+di}  = \vb{u}(t) + i \vb{w}(t) $$
+	then the two real-valued solutions we are seeking are $\vb{u}(t), \vb{w}(t)$
+	\item The general solution is $C_{1}\vb{u}(t) + C_{2}\vb{w}(t) $
+	\item Find $C_{1},C_{2}$ if given an initial condition
+\end{itemize}
+
+Let's see some example
+\begin{example} Solve
+$$ \vx'(t) = \Mat{-3}{2}{-4}{1}\vx(t), \quad \vx(0) = \Vec{2}{5} $$
+\end{example}
+\Sol Note that
+$$A-\ld I  =  \Mat{-3-\ld}{2}{-4}{1-\ld} \imply (-3-\ld)(1-\ld) + 8 = 0 \imply \ld^{2}+2\ld +5 = 0 \imply (\ld+1)^{2} = -4 \imply \ld = -1 \pm 2i $$
+We just need to work with one of these eigenvalues. We will use $\ld = -1+2i$. We now find corresponding eigenvector;
+$$ 0 = A-(-1+2i)I \v = \Mat{-2-2i}{2}{-4}{2-2i}\Vec{v_{1}}{v_{2}} = 0 \imply (-2-2i)v_{1}+2v_{2 } = 0 \imply \Vec{v_{1}}{v_{2}} = \Vec{1}{1+i} $$
+So we have a complex-valued solution
+$$ e^{(-1+2i)t} \Vec{1}{1+i} = e^{-t}(\cos 2t + i \sin 2t)\Vec{1}{1+i}  = e^{-t}\Vec{\cos 2t + i \sin 2t}{(\cos 2t + i \sin 2t)(1+i)} $$
+$$ =  e^{-t}\Vec{\cos 2t + i \sin 2t}{\cos 2t + i\sin 2t+i\cos 2t -\sin 2t } = e^{-t}\Vec{\cos 2t + i \sin 2t}{(\cos 2t -\sin 2t)+i(\cos 2t +\sin 2t) } $$  
+$$ = e^{-t}\Vec{\cos 2t}{\cos 2t -\sin 2t }  + i e^{-t}\Vec{ \sin 2t}{\cos 2t +\sin 2t } $$
+so we have found two real-valued solutions
+$$ \vb{u}(t) = e^{-t}\Vec{\cos 2t}{\cos 2t -\sin 2t } , \quad \vb{w}(t) = e^{-t}\Vec{ \sin 2t}{\cos 2t +\sin 2t } $$
+The general solution is then given by
+$$ \vb{x}(t) = C_{1}e^{-t}\Vec{\cos 2t}{\cos 2t -\sin 2t } + C_{2}e^{-t}\Vec{ \sin 2t}{\cos 2t +\sin 2t } $$
+Plugging in $t = 0$ yields
+$$ C_{1}\Vec{1}{1} + C_{2}\Vec{0}{1} = \Vec{2}{5} \imply C_{1} = 2, C_{2}= 3 $$
+Thus, the solution to the IVP is
+$$ \vb{x}(t) =  2e^{-t}\Vec{\cos 2t}{\cos 2t -\sin 2t } + 3e^{-t}\Vec{ \sin 2t}{\cos 2t +\sin 2t } = e^{-t}\Vec{2\cos 2t +3\sin 2t }{5\cos 2t +\sin 2t } $$
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  

@@ -1,0 +1,171 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+\renewcommand{\v}{\vec{\mathbf{v}}}
+\newcommand{\w}{\vec{\mathbf{w}}}
+\newcommand{\x}{\vec{\mathbf{x}}}
+\newcommand{\X}{\mathbf{X}}
+\renewcommand{\b}{\vec{\mathbf{b}}}
+
+\newcommand{\vb}[1]{\vec{\textbf{#1}}}
+\newcommand{\vecx}{\vec{\mathbf{x}}}
+\newcommand{\hx}{\hat{\mathbf{x}}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+\renewcommand{\Vec}[2]{\l[ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular} \r]}
+\newcommand{\Mat}[4]{\l[ \begin{tabular}{cc} $#1$ &$#2$ \\ $#3$ &$#4$ \end{tabular} \r]}
+
+\title{MATH 53 Note: 05/09/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+
+\section{Inhomogeneous system of ODE: $\x'(t) = A\x(t) + g(t)$}
+To solve inhomogenous system of ODE, we do the following 
+\begin{enumerate}
+	\item First, solve the associated homogeneous system, $\x'(t) = A\x(t)$, and get the general solution $C_{1}\x_{1}(t)+C_{2}\x_{2}(t)$.
+	\item Find one solution $\x_{p}(t)$ to $\x'(t) = A\x(t) + g(t)$. $\x_{p}(t)$ is usually called \textit{particular solution}.
+	\item The general solution of  $\x'(t) = A\x(t) + g(t)$ is given by $\x_{p}(t)+C_{1}\x_{1}(t)+C_{2}\x_{2}(t)$.
+	\item If given initial condition, then find $C_{1},C_{2}$
+\end{enumerate}
+Step (1) has been covered in the past two weeks. The only non-trivial step is step (2). We will discuss two methods to find a solution $\x_{p}(t)$ of $\x'(t) = A\x(t) + g(t)$. 
+
+\subsection{Method of undetermined coefficients, i.e. guess the form of $x_{p}(t)$}
+Remember that our goal is just to find one solution. So one easy way to do it is to guess that $\x_{p}(t)$ might be of a certain form, then plug in and solve for $\x_{p}(t)$. The advantage of using this method is it's easy to compute, but the downside is that in many cases, we might not know what to guess. Let's discuss some cases when we can do this. If $g(t) = \b $ is a constant, then we can try to find a solution $\x_{p}(t)$ that is a constant. Assume $\x_{p}(t) = \x_{0}$ solves $\x'(t) = A\x(t) + b$ , then because it is a constant, $\x'_{p}(t) = 0$,so
+$$ 0 = A\x_{0}+\b  \imply \x_{0} = -A^{-1}\b $$
+We have found one solution to $\x'(t) = A\x(t) + b$ namely $\x_{p}(t) = -A^{-1}\b$. See page 272 of the text to get some idea of how to guess the form the solution in other cases. 
+
+
+\subsection{Variation of parameter, i.e. use formula}
+Suppose we have solved the homogeneous system and find two independent solution $\x_{1}(t),\x_{2}(t)$, the general solution of the homogeneous system is then
+$$ C_{1}\x_{1}(t)+C_{2}\x_{2}(t)$$
+If we look for a particular solution $\x_{p}(t)$ of the form
+$$ \mu_{1}(t) \x_{1}(t) + \mu_{2}\x_{2}(t) $$
+It turns out for any $g(t)$, we can solve for $\mu_{1}(t),\mu_{2}(t)$. See the detailed derivation on page 286-287 of the text. W e get a particular solution 
+$$ \x_{p}(t) = \X(t) \int \X^{-1}(t)g(t)dt,\quad \X(t) = \l[\x_{1}(t),\; \x_{2}(t) \r] $$
+
+\begin{example} Find general solution of the system
+$$ x'(t) = x(t)-4y(t) + 1, \quad y'(t) = 2x(t)-5y(t) + 2 $$
+\end{example}
+\Sol Write the system in the matrix form
+$$ \x'(t) = \Mat{1}{-4}{2}{-5} \x(t) + \Vec{1}{2} $$
+Then we do step (1); solving the homogeneous system. We first find eigenvalues of $A$,
+$$ A-\ld I =  \Mat{1-\ld}{-4}{2}{-5-\ld} \imply (\ld-1)(\ld+5)+8 = 0 \imply \ld^{2}+4\ld +3 = 0 \imply \ld = -1,-3 $$
+We are in the case of two different real eigenvalues, so we simply find eigenvectors corresponding to each eigenvalues, then we get two solutions. For $\ld = -3$,
+$$ \Mat{4}{-4}{2}{-2}\v_{1} = 0 \imply \v_{1} = \Vec{1}{1}$$
+For $\ld = -1$,
+$$ \Mat{2}{-4}{2}{-4}\v_{1} = 0 \imply \v_{1} = \Vec{2}{1}$$
+So the general solution of the homogeneous equation is
+$$ C_{1}e^{-3t}\Vec{1}{1}+C_{2}e^{-t}\Vec{2}{1} $$
+Now we do step (2); finding a particular solution. The inhomogeneous part is constant, so we know that $-A^{-1}\b$ is a constant solution to 
+$$ \x'(t) = \Mat{1}{-4}{2}{-5} \x(t) + \Vec{1}{2} $$
+So we compute
+$$ -A^{-1}\b  = - \frac{1}{3}\Mat{-5}{4}{-2}{1}\Vec{1}{2}  = \Vec{-1}{0} $$
+The general solution of the inhomogenous system
+$$ \x'(t) = \Mat{1}{-4}{2}{-5} \x(t) + \Vec{1}{2} $$
+is given by
+$$ \x(t) = \Vec{-1}{0} + C_{1}e^{-3t}\Vec{1}{1}+C_{2}e^{-t}\Vec{2}{1} $$
+
+\begin{example} Find general solution of the system
+$$ x'(t) = x(t)-4y(t) + t, \quad y'(t) = 2x(t)-5y(t) + 2 $$
+\end{example}
+\Sol  Write the system in the matrix form
+$$ \x'(t) = \Mat{1}{-4}{2}{-5} \x(t) + \Vec{t}{2} $$
+The step (1) is the same as in the previous example. We have a general solution to the homogeneous system
+$$ C_{1}e^{-3t}\Vec{1}{1}+C_{2}e^{-t}\Vec{2}{1} $$
+Now we do step (2) by using explicit formula from the variation of parameter method,
+$$ \x_{1}(t) = e^{-3t}\Vec{1}{1},\; \x_{2}(t) = e^{-t}\Vec{2}{1}  \imply \X(t) = \Mat{e^{-3t}}{2e^{-t}}{e^{-3t}}{e^{-t}} $$
+$$ \X^{-1}(t)g(t) = -\frac{1}{e^{-4t}}\Mat{e^{-t}}{-2e^{-t}}{-e^{-3t}}{e^{-3t}} \Vec{t}{2} = \Vec{(4-t)e^{3t}}{(t-2)e^{t}}  $$
+Using integration by part,
+$$ \int \X^{-1}(t)g(t) dt =  \Vec{\l(\frac{13-3t}{9}\r)e^{3t}}{(t-3)e^{t}} $$
+so
+$$ \X(t) \int \X^{-1}(t)g(t) dt  = \Mat{e^{-3t}}{2e^{-t}}{e^{-3t}}{e^{-t}} \Vec{\l(\frac{13-3t}{9}\r)e^{3t}}{(t-3)e^{t}}  = \Vec{\l(\frac{13-3t}{9}\r) + 2(t-3)}{\l(\frac{13-3t}{9}\r)+t-3} = \Vec{ \frac{15t-41}{9} }{\frac{6t-14}{9}}$$
+The general solution is 
+$$ \Vec{ \frac{15t-41}{9} }{\frac{6t-14}{9}} + C_{1}e^{-3t}\Vec{1}{1}+C_{2}e^{-t}\Vec{2}{1} $$ 
+
+
+
+
+
+
+\end{document}  

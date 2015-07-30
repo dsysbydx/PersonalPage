@@ -1,0 +1,167 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+\renewcommand{\v}{\vec{v}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+\renewcommand{\Vec}[2]{\l[ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular} \r]}
+\newcommand{\Mat}[4]{\l[ \begin{tabular}{cc} $#1$ &$#2$ \\ $#3$ &$#4$ \end{tabular} \r]}
+
+\title{MATH 53 Note: 04/18/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+\section{Eigenvalues and Eigenvectors}
+
+\ni\tf{Definition. } Given a matrix $A$, a real or complex number $\ld$ is called an \ti{eigenvalue} if there exist NON-ZERO vector $\v$ such that $A\v = \ld \v$, or equivalently, $(A-\ld I)\v = 0$. This non-zero vector is called \ti{eigenvector}.
+
+The last condition in the definition (there exist non-zero vector such that  $(A-\ld I)\v = 0$) holds if and only if 
+$$ \det (A-\ld I) = 0$$
+This equation is called \ti{characteristic equation} and is what you will use to find eigenvalues. In the case of 2 by 2, this will give a quadratic equation for $\ld$.
+
+Once you find eigenvalues, the next thing is to find an associated eigenvector, this can be done by solving for $\v  = \Vec{v_{1}}{v_{2}}$ that satisfies
+$$  (A-\ld I)\v = 0 $$
+For the case of 2 by 2 matrix, this will give you two equivalent equations, pick one equation and we will get a relationship between two components $v_{1},v_{2}$. If you only want to find one eigenvector, just plug in either $v_{1}$ or $v_{2}$ by 1 (or any non-zero number you want) and solve for the other one. 
+
+Let's see some example to see how this works.
+
+\bex Find all eigenvalues and eigenvectors of
+$$ \l[ \begin{tabular}{cc} -4 &-3 \\ 1 &0 \end{tabular} \r]$$
+\eex
+
+\ni First we solve for eigenvalues by solving 
+$$ \det (A-\ld I) = 0 \imply \det  \l[ \begin{tabular}{cc} -4-$\ld$ &-3 \\ 1 &$-\ld$ \end{tabular} \r] = 0 \imply (-4-\ld)(-\ld)-(1)(-3) = 0 $$
+$$ \imply 4\ld + \ld^{2}+3 = 0 \imply (\ld + 3)(\ld + 1) = 0 \imply \ld = -1,-3$$
+Next, we will find an eigenvector associated to eigenvector = $-1$, this can be done by plugging $\ld = -1$ and solve for $\v  = \Vec{v_{1}}{v_{2}}$ such that
+$$  (A-(-1)\cdot I)\v = 0  \imply  \Mat{-4-(-1)}{-3}{1}{0-(-1)} \v = 0 \imply \Mat{-3}{-3}{1}{1}\Vec{v_{1}}{v_{2}}  = 0  $$
+From this we have two equations for $v_{1},v_{2}$,
+$$ \begin{tabular}{l} $-3(v_{1}+v_{2}) = 0$ \\$ v_{1}+v_{2}=0$ \end{tabular} \imply v_{1}+v_{2}= 0 \imply v_{2}= -v_{1}  $$
+Then we have
+$$ \v = \Vec{v_{1}}{v_{2}} = \Vec{v_{1}}{-v_{1}} =v_{1} \Vec{1}{-1} $$
+So eigenvectors associated to eigenvalue $-1$ are any multiple of $\Vec{1}{-1}$. If we want to find just one eigenvector, then from 
+$$ v_{2}= -v_{1}   $$
+we can just plug in $v_{1}=1$, then $v_{2} = -v_{1} = -1$ and we have $\Vec{-1}{1}$ as an eigenvector. Similarly for eigenvalue $-3$, we get
+$$  (A-(-3)\cdot I)\v = 0  \imply  \Mat{-4-(-3)}{-3}{1}{0-(-3)} \v = 0 \imply \Mat{-1}{-3}{1}{3}\Vec{v_{1}}{v_{2}}  = 0  $$
+From this we have two equations for $v_{1},v_{2}$,
+$$ \begin{tabular}{l} $-v_{1}-3v_{2} = 0$ \\$ v_{1}+3v_{2}=0$ \end{tabular} \imply v_{1}+3v_{2}= 0 \imply v_{1}= -3v_{2}  $$
+then we can just plug in $v_{2}=1$, then $v_{1} = -3v_{2} = -3$ and we have $\Vec{-3}{1}$ as an eigenvector.
+
+
+\bex Find all eigenvalues and eigenvectors of
+$$ \l[ \begin{tabular}{cc} 7 &1 \\ -4 &3 \end{tabular} \r]$$
+\eex
+
+\ni First we solve for eigenvalues by solving 
+$$ \det (A-\ld I) = 0 \imply \det  \l[ \begin{tabular}{cc} 7-$\ld$ &1 \\ -4 &$3-\ld$ \end{tabular} \r] = 0 \imply (7-\ld)(3-\ld)-(-4)(1) = 0 $$
+$$ \imply 21-10\ld + \ld^{2}+4 = 0\imply \ld^{2}-10\ld + 25 = 0  \imply (\ld - 5)^{2} = 0 \imply \ld = 5$$
+Next, we will find an eigenvector associated to eigenvector = $5$, this can be done by plugging $\ld = 5$ and solve for $\v  = \Vec{v_{1}}{v_{2}}$ such that
+$$  (A-(5)\cdot I)\v = 0  \imply  \Mat{7-5}{1}{-4}{3-5} \v = 0 \imply \Mat{2}{1}{-4}{-2}\Vec{v_{1}}{v_{2}}  = 0  $$
+From this we have two equations for $v_{1},v_{2}$,
+$$ \begin{tabular}{l} $2v_{1}+v_{2} = 0$ \\$ -4v_{1}-2v_{2}=0$ \end{tabular} \imply 2v_{1}+v_{2}= 0 \imply v_{2}= -2v_{1}  $$
+Suppose we only want to find just one eigenvector, then from 
+$$ v_{2}= -2v_{1}   $$
+we can just plug in $v_{1}=1$, then $v_{2} = -2v_{1} = -2$ and we have $\Vec{1}{-2}$ as an eigenvector. 
+
+
+\bex Find all eigenvalues and eigenvectors of
+$$ \l[ \begin{tabular}{cc} -1/2 &1 \\ -1 &-1/2 \end{tabular} \r]$$
+\eex
+
+\ni First we solve for eigenvalues by solving 
+$$ \det (A-\ld I) = 0 \imply \det  \l[ \begin{tabular}{cc} $-1/2-\ld$ &1 \\$ -1$ &$-1/2-\ld$ \end{tabular} \r] = 0 \imply (-1/2-\ld)^{2}-(-1)(1) = 0 $$
+$$ \imply 1/4 + \ld + \ld^{2}+1 = 0 \imply\ld^{2}+\ld+5/4= 0 \imply \ld = \frac{-1\pm \sqrt{1-4(5/4)}}{2} = -1/2 \pm i$$
+Next, we will find an eigenvector associated to eigenvector = $-1/2+i$, this can be done by plugging $\ld = -1/2+i$ and solve for $\v  = \Vec{v_{1}}{v_{2}}$ such that
+$$  (A-(-1/2+i)\cdot I)\v = 0  \imply  \Mat{-1/2-(-1/2+i)}{1}{-1}{-1/2-(-1/2+i)} \v = 0 \imply \Mat{-i}{1}{-1}{-i}\Vec{v_{1}}{v_{2}}  = 0  $$
+From this we have two equations for $v_{1},v_{2}$,
+$$ \begin{tabular}{l} $-i v_{1}+v_{2} = 0$ \\$ -v_{1}-iv_{2}=0$ \end{tabular} \imply -iv_{1}+v_{2}= 0 \imply v_{2}= iv_{1}  $$
+Plug in $v_{1}=1$, then $v_{2} = iv_{1} = i$ and we have $\Vec{1}{i}$ as an eigenvector. Similarly for eigenvalue $-1/2-i$, we get the eigenvector (try this yourself!)  $\Vec{1}{-i}$.
+
+
+ 
+
+
+
+
+
+
+\end{document}  

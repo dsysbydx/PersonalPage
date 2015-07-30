@@ -1,0 +1,164 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+
+\title{MATH 53 Review for Midterm 1}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+
+\ni In the past three weeks, we have covered many cases of ODE of the form
+$$ M(x,y)+N(x,y)y' = 0 $$
+\vspace{0.2in}
+\subsection*{Linear First Order ODE}
+If $N(x,y)=1, M(x,y) = a(x)y-b(x)$, then the ODE is called linear (since $M$ is linear in $y$). In other words, the ODE is of the form
+$$ y' + a(x)y = b(x) $$
+To solve this equation, we do the following step
+\bi
+\item multiply by integrating factor $\mu(x) = e^{\int a(x) dx}$. In the case of constant coefficient, $a(x) = a$, then the integrating factor is simply $e^{ax}$
+\item Then we will have $\frac{d}{dx}(e^{\int a(x)dx}y) = e^{\int a(x)dx} b(x) $. Integrating both side and rearrange the term, and we get the solution. Don't forget the CONSTANT when integrating.
+\item If given the initial condition, plug it in to find the constant.
+\ei
+
+\vspace{0.2in}
+\subsection*{Separable Equation}
+If  $N$ is a function of $y$ only and $M$ is a function of $x$ only, then the ODE is called separable. To see if the ODE is separable, one systematic way of checking that is to rearrange the terms by moving everything but $y'$ to the right so that you have
+$$ y' = f(y,x)$$
+If you can separate the RHS by writing it as a PRODUCT of two functions, one is a function of $y$ only, the other is a function of $x$ only, 
+$$ y' = f(y,x) = g(y)h(x) $$
+then it is separable. If it is separable, then we can solve the ODE by following these steps
+\bi
+\item Rewrite the ODE as 
+$$  ( .. y .. )dy = (.. x .. )dx $$
+\item Take the integral both side then we get the \textit{implicit} relationship between $y$ and $x$. 
+\item If given the initial condition, plugging in to find the constant
+\item If possible, rearrange terms to get the \textit{explicit} answer, i.e.. $y(x) = \dots$. 
+\ei
+
+\vspace{0.2in}
+\subsection*{Exact equation}
+If $M,N$ satisifes
+$$ M_{y} = N_{x}$$
+then the ODE is called exact and we can solve the ODE as follows;
+\bi
+\item First check that $M_{y} = N_{x}$. If it's not, we can try to make it exact (see next topic)
+\item Write $ H_{x}(x,y)  = M(x,y), \quad H_{y}(x,y) = N(x,y) $ 
+\item Choose one of the two equations above that looks easier to work with, take the integral (suppose I start with the second equations) to get
+$$ H(x,y) = \int N(x,y)dy + g(x) $$
+\item  Recall that our goal is to find $H$ and we almost know what $H$ is except that we don't know what $g$ is. We only know that it's just a function of $x$. To find $g$, we take the partial derivative and match that with the other condition. In this case, we take partial with respect to $x$. From this we get $g'(x) = \dots$, then we can solve for $g(x)$. \\ 
+\item We now know what $H(x,y)$ is and the solution is given by
+$$ H(x,y) = C $$
+\item The last step is the same as usual. Plugging in the initial condition, if given, to find $C$, then rearrange the terms to write $y(x) = \dots$ if possible.
+\ei
+
+\vspace{0.2in}
+\subsection*{Exact equation with integrating factor}
+Suppose the ODE is not exact, we can try to multiply by a function to make it exact by the following step.
+\bi
+\item Assuming $M_{y} \neq N_{x}$ (otherwise, follow steps in the previous section) ,then we check if 
+$$\frac{M_{y}(x,y)-N_{x}(x,y)}{N(x,y)} \text{ is a function of only }x$$
+If it is, let $a(x) = \frac{M_{y}(x,y)-N_{x}(x,y)}{N(x,y)}$, then the integrating factor is
+$$ \mu(x) = e^{\int a(x) dx } $$
+\item If $ \frac{M_{y}(x,y)-N_{x}(x,y)}{N(x,y)}$ is not a function of $x$ only but has some $y$ in there. We can try to look for an integrating factor which is a function of $y$ only. To do that, we check that
+$$\frac{N_{x}(x,y)-M_{y}(x,y)}{M(x,y)} \text{ is a function of only }y$$
+If it is, let $b(y) = \frac{N_{x}(x,y)-M_{y}(x,y)}{M(x,y)}$, then the integrating factor is
+$$ \mu(y) = e^{\int b(y) dy } $$
+\item Multiply the original ODE by $\mu(x)$ (or $\mu(y)$)
+\item Now the equation becomes exact and we can solve it in the same way as described in the previous section.
+\ei 
+\ni\tf{Remark} See the section note for detail how to get the integrating factor and why the conditions appear this way. I don't recommend memorizing all these conditions. You should understand where they come from and should be able to derive them. 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  

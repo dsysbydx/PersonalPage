@@ -1,0 +1,177 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+
+\title{MATH 53 Note: 04/16/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+\section{Exact equation}
+
+\ni Recall that the first order ODE
+$$ M(x,y)+N(x,y)y' = 0 $$
+is called \textit{exact} if 
+$$ M_{y}(x,y) = N_{x}(x,y) $$
+In this case, there exist $H(x,y)$ such that
+$$ H_{x}(x,y) = M(x,y),\quad H_{y}(x,y) =N(x,y) $$
+and the solution is given by
+$$ H(x,y(x)) = C$$
+Note that \textit{separable} equation is a special case of exact equation. When the ODE is separable, we get
+$$ M_{y} = 0 = N_{x} $$
+To find $H$, we start with either $H_{x} = M$ or $H_{y} = N$, then we take the integral. Since we are dealing with partial derivative, the constant is a function of another variable. Then we need the other condition to determine the constant. This might be a bit confusing for now, but let's look at some examples to see how this works.
+
+\bex Determine if the following ODE is exact or not.
+\begin{enumerate}
+	\item $2y+xy' = 0$
+	\item $2xy + x^{2}y' = 0$
+	\item $xy' = -1-2x^{2}$
+	\item $e^{x^{2}+y}(1+2x^{2})+xe^{x^{2}+y}y' = 0$
+	\item $3xy+y^{2} + (x^{2}+xy)y' = 0$
+	\item  $3x^{2}y+xy^{2} + (x^{3}+x^{2}y)y' = 0$ 
+\end{enumerate}
+\eex
+\ni\ti {Answer} (1),(3),(5) are not exact, but after multiplying by integrating factors, we get (2),(4),(6) [respectively] which are exact. 
+
+\bex Solve  
+$$3x(xy-2) + (x^{3}+ 2y) y' = 0$$ 
+with initial condition $y(0)=1$
+\eex
+
+\ni\ti{Solution} Note that
+$$ M(x,y) = 3x(xy-2),\quad N(x,y) = x^{3}+2y $$
+and
+$$ M_{y} = 3x^{2} = N_{x} $$
+so the ODE is exact. We want to find $H(x,y)$ such that
+$$ H_{x} = 3x(xy-2) = 3x^{2}y-6x,\quad H_{y} = x^{3}+2y $$
+We start with the second condition. Taking the integral with respect to $y$ gives
+$$ H(x,y) = x^{3}y+y^{2}+C(x)$$
+Taking derivative of this gives
+$$ H_{x}(x,y) = 3x^{2}y+y^{2}+C'(x) $$
+Comparing with the first condition gives
+$$ C'(x) = -6x,\quad C(x) = -3x^{2} $$
+So we have that 
+$$ H(x,y) = x^{3}y+y^{2}-3x^{2}$$
+and the general solution is given by
+$$ x^{3}y(x)+y(x)^{2}-3x^{2} = C $$
+Given the initial condition $y(0)=1$, we plug in $x=0,y(x)=y(0)=1$ to find that $C=1$. The solution is
+$$ x^{3}y(x)+y(x)^{2}-3x^{2} = 1 $$
+We can write this out explicitly using quadratic formula to get
+$$ y(x) = \frac{-x^{3}\pm\sqrt{x^{6}-4(-3x^{2}-1)}}{2} $$
+Checking with initial $y(0)=1$, we know it's the solution with the plus sign, so the explicit solution is
+$$ y(x) = \frac{-x^{3}+\sqrt{x^{6}+12x^{2}+4}}{2}  $$
+
+\bex Solve  
+$$(\cos y + y \cos x) + (\sin x - x \sin y) y' = 0$$ 
+with initial condition $y(0) = -1$
+\eex
+
+\ni\ti{Solution}  Note that
+$$ M(x,y) =\cos y + y \cos x,\quad N(x,y) = \sin x - x \sin y $$
+and
+$$ M_{y} = -\sin y + \cos x = N_{x} $$
+so the ODE is exact. We want to find $H(x,y)$ such that
+$$ H_{x} = \cos y + y \cos x,\quad H_{y} = \sin x - x \sin y $$
+This time, we take the first condition and take the integral with respect to $x$ and get
+$$ H(x,y) = x\cos y + y\sin x + C(y) $$
+Taking derivative with respect to $y$,
+$$ H_{y}(x,y) = -x\sin y + \sin x + C'(y) $$
+Comparing with the second condition, we get
+$$ C'(y) = 0 \imply C(y) = C $$
+So the general solution is
+$$ H(x,y) = C \imply x\cos y + y\sin x = C $$
+Plugging in initial condition $y(0)=-1$, we get
+$$ C = H(0,-1) = 0 + 0 = 0 $$
+So the solution is
+$$  x\cos y + y\sin x = 0 $$
+In this case, we cannot find an explicit formula.
+
+
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  

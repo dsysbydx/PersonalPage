@@ -1,0 +1,166 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+\renewcommand{\v}{\vec{v}}
+\newcommand{\vb}[1]{\vec{\textbf{#1}}}
+\newcommand{\vecx}{\vec{\mathbf{x}}}
+\newcommand{\hx}{\hat{\mathbf{x}}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+\renewcommand{\Vec}[2]{\l[ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular} \r]}
+\newcommand{\Mat}[4]{\l[ \begin{tabular}{cc} $#1$ &$#2$ \\ $#3$ &$#4$ \end{tabular} \r]}
+
+\title{MATH 53 Note: 04/30/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+\section{Solving $\vecx'(t) = A\vecx(t)$}
+
+Recall that our strategy for solving $\vecx'(t) = A\vecx(t)$ is as follows;
+
+\begin{itemize}
+	\item First, we look for two ``independent'' solutions, called them $ \vecx_{1}(t),\vecx_{2}(t)$.
+	\item Form a general solutions by taking a linear combination of those two solutions, that is, the general solution is
+	$$  C_{1}\vecx_{1}(t)+C_{2}\vecx_{2}(t)  $$
+	\item Plug in the initial condition (if given) to find $C_{1},C_{2}$. 
+\end{itemize}
+Let's look at the one dimensional problem to get some idea of how to find a solution for 2D problem. The analogue of this equation in 1D is simply
+$$ u'(t) = cu(t) $$
+and a solution is given by
+$$ u(t) = e^{ct} $$
+From that, we will first look for a solution of the form
+$$ \vecx(t) = e^{\ld t}\Vec{a}{b} $$
+We want to find out which $\ld, a,b$ will make $\vecx(t)$ a solution. By plugging this back in $\vecx'(t) = A\vecx(t)$, we get that
+$$ \ld e^{\ld t}\Vec{a}{b} = A e^{\ld t}\Vec{a}{b} \imply A\Vec{a}{b}  = \ld  \Vec{a}{b}  $$
+That is, we have just shown that \textbf{ if $\ld$ is an eigenvalue and $\Vec{a}{b} $ is a corresponding eigenvector of matrix $A$, then
+$$   \vecx(t) = e^{\ld t}\Vec{a}{b}  $$
+is a solution to  $\vecx'(t) = A\vecx(t)$.}
+
+The recipe for finding two solutions will depend on eigenvalues of matrix $A$, which can be divided into three cases;
+\begin{itemize}
+	\item $A$ has two different real eigenvalues $\lambda_{1} \neq \lambda_{2}$
+	\item $A$ has complex eigenvalues $\lambda_{1} = \alpha+\beta i , \lambda_{2}= \alpha-\beta i $
+	\item $A$ has repeated eigenvalues $\lambda_{1}=\lambda_{2}$
+\end{itemize}
+
+\section{Case I: two different real eigenvalues $\ld_{1} \neq \ld_{2}$ }
+Assume $A$ has two different real-valued eigenvalues $\lambda_{1} \neq \ld_{2}$. Let $\vec{v}_{1},\vec{v}_{2}$ denote the corresponding eigenvectors. In this case, we have two solution right away
+$$ \vecx_{1}(t) = e^{\ld_{1}t}\vec{v}_{1},\quad \vecx_{2}(t) = e^{\ld_{2}t}\vec{v}_{2} $$
+so the general solution is given by
+$$ \vecx(t) = C_{1}e^{\ld_{1}t}\vec{v}_{1} + C_{2}e^{\ld_{2}t}\vec{v}_{2} $$
+
+\begin{example} Solve system of ODE
+$$ x'(t) = 3x(t)+2y(t), y'(t) = x(t)+2y(t), x(0)=0,y(0)=-3 $$
+\end{example}
+
+\Sol We first write an equation in a matrix form
+$$ \vb{x}'(t) = \Mat{3}{2}{1}{2} \vb{x}(t),\qquad \vb{x}(0) = \Vec{0}{-3} $$
+We then find an eigenvalue of $A =  \Mat{3}{2}{1}{2}$,
+$$ \ld I - A = \Mat{\ld - 3}{-2}{-1}{\ld - 2} \imply (\ld-3)(\ld-2) - 2 = 0 \imply \ld^{2}-5\ld +4 = 0 \imply \ld = 4,1 $$
+Start with $\ld_{1} = 4$,
+$$ 4I - A = \Mat{1}{-2}{-1}{2} \imply \vec{v}_{1} = \Vec{2}{1} $$
+We have found one solution to the system of ODE,
+$$ \vb{x}_{1}(t) = e^{4t}\Vec{2}{1} $$
+Next, we work with $\ld_{2}= 1$,
+$$ 1I - A = \Mat{-2}{-2}{-1}{-1} \imply \vec{v}_{1} = \Vec{1}{-1} $$
+We have found a second solution to the system of ODE,
+$$ \vb{x}_{2}(t) = e^{t}\Vec{1}{-1} $$
+Now that we have found two solutions, the general solution is simply
+$$ \vb{x}(t) = C_{1} e^{4t}\Vec{2}{1} +C_{2} e^{t}\Vec{1}{-1} $$
+Plugging in initial condition $t=0$ yields
+$$ \Vec{0}{-3} =  \vb{x}(0) = C_{1}\Vec{2}{1} +C_{2} \Vec{1}{-1}  = \Vec{2C_{1}+C_{2}}{C_{1}-C_{2}} $$
+Solving this, we get $C_{1}= -1, C_{2}=2$, thus the solution to the IVP is
+$$ \vb{x}(t) = -e^{4t}\Vec{2}{1} +2 e^{t}\Vec{1}{-1} = \Vec{ -2e^{-4t}+2e^{t}}{-e^{4t}-2e^{t}}  $$
+
+
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  

@@ -1,0 +1,157 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+\newcommand{\imply}{ \quad \Rightarrow \quad}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\bex}{\begin{example}}
+\newcommand{\eex}{\end{example}}
+\newcommand{\tdM}{\tilde{M}}
+\newcommand{\tdN}{\tilde{N}}
+\newcommand{\Sol}{\ni\ti{Solution. }}
+
+\renewcommand{\v}{\vec{\mathbf{v}}}
+\newcommand{\w}{\vec{\mathbf{w}}}
+\newcommand{\x}{\vec{\mathbf{x}}}
+\newcommand{\vx}{\vec{\mathbf{x}}}
+
+\newcommand{\vb}[1]{\vec{\textbf{#1}}}
+\newcommand{\vecx}{\vec{\mathbf{x}}}
+\newcommand{\hx}{\hat{\mathbf{x}}}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+\renewcommand{\Vec}[2]{\l[ \begin{tabular}{c} $#1$ \\ $#2$ \end{tabular} \r]}
+\newcommand{\Mat}[4]{\l[ \begin{tabular}{cc} $#1$ &$#2$ \\ $#3$ &$#4$ \end{tabular} \r]}
+
+\title{MATH 53 Note: 05/07/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+
+\section{Case III: Repeated Eigenvalues}
+Suppose that $A$ has repeated eigenvalues, that is, $\ld_{1}=\ld_{2}=\ld$, then we can solve $\vx'(t) = A\vx(t)$ as follows;
+\begin{enumerate}
+	\item If $A$ is a diagonal matrix $\Mat{\ld}{0}{0}{\ld}$, then any vector is an eigenvector, so we have two independent eigenvectors $\v_{1}=\Vec{1}{0}, \v_{2}=\Vec{0}{1}$. We have two solutions
+	$$ \vx_{1}(t) = e^{\ld t}\Vec{1}{0},\quad \vx_{2}(t) = e^{\ld t}\Vec{0}{1} $$
+The general solution is simply
+$$ \vx(t) = C_{1}e^{\ld t}\Vec{1}{0} + C_{2}e^{\ld t}\Vec{0}{1} $$
+
+	\item In most cases, $A$ will not be a diagonal matrix, and it can be shown that we cannot find two linearly independent eigenvector. Let $\v$ be an eigenvector, then we have only one solution
+	$$ \x_{1}(t) = e^{\ld t}\v $$
+	As you have seen in class, the second solution will be of the form
+	$$ \x_{2}(t) = e^{\ld t}\l( t\v + \w \r) $$
+	where $\ld,\v$ is the eigenvalue,eigenvector that we found. To find $\w$, we solve
+	$$ (A-\ld I)\w = \v $$
+	Note that we just need to find one $\w$ that satisfies the above equation. Then the general solution is simply
+	$$ \x(t) = C_{1}e^{\ld t}\v  + C_{2}e^{\ld t}\l( t\v + \w \r)  $$
+\end{enumerate}
+
+
+
+Let's see some example
+\begin{example} Solve
+$$ \vx'(t) = \Mat{-3}{2}{-2}{1}\vx(t), \quad \vx(0) = \Vec{2}{5} $$
+\end{example}
+\Sol Note that
+$$A-\ld I  =  \Mat{-3-\ld}{2}{-2}{1-\ld} \imply (-3-\ld)(1-\ld) + 4 = 0 \imply \ld^{2}+2\ld +1 = 0 \imply \ld = -1  $$
+Next, we find a corresponding eigenvector;
+$$ 0 = A-(-1)I \v = \Mat{-2}{2}{-2}{2}\Vec{v_{1}}{v_{2}} = 0 \imply -v_{1}+v_{2 } = 0 \imply \Vec{v_{1}}{v_{2}} = \Vec{1}{1} $$
+So we have the first solution
+$$ \x_{1}(t) = e^{-t} \Vec{1}{1} $$
+And we know that the second solution is
+$$ \x_{2}(t) = e^{-t}\l( t\Vec{1}{1} + \w \r) $$
+Now we find $\w$ by solving
+$$ (A-\ld I) \w = \v \imply \Mat{-2}{2}{-2}{2}\w = \Vec{1}{1} \imply -2w_{1}+2w_{2} = 1 \imply \w = \Vec{1}{\frac{3}{2}}$$
+so the second solution is
+$$ \x_{2}(t) = e^{-t}\l( t\Vec{1}{1} + \Vec{1}{\frac{3}{2}} \r) $$
+The general solution is
+$$ \x(t) =  C_{1}e^{-t} \Vec{1}{1}+C_{2}e^{-t}\l( t\Vec{1}{1} + \Vec{1}{\frac{3}{2}} \r) $$
+Plugging in $t = 0$ yields
+$$ C_{1}\Vec{1}{1} + C_{2}\Vec{1}{\frac{3}{2}} = \Vec{1}{2} \imply C_{1} = -1, C_{2}= 2 $$
+Thus, the solution to the IVP is
+$$ \x(t) =  -e^{-t} \Vec{1}{1}+2e^{-t}\l( t\Vec{1}{1} + \Vec{1}{\frac{3}{2}} \r) $$
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  

@@ -1,0 +1,169 @@
+\documentclass[10pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage} %to reduce margin
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{framed} % or, "mdframed"
+%\usepackage[framed]{ntheorem}
+%\newframedtheorem{theo}{Theorem}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\renewcommand{\i}{\item}
+\newcommand{\ei}{\end{itemize}}
+\renewcommand{\ni}{\noindent}
+\newcommand{\tf}{\textbf}
+\newcommand{\ld}{\lambda}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tsg}{\tilde{\sigma}}
+\newcommand{\sg}{\sigma}
+\newcommand{\mc}{\mathcal}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^{d}}
+\newcommand{\Rtd}{\mathbb{R}^{2d}}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\PoR}{\mathcal{P}_{1}(\mathbb{R})}
+\newcommand{\tdW}{d\tilde{W}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\halpha}{\hat{\alpha}}
+\newcommand{\hX}{\hat{X}}
+\newcommand{\hY}{\hat{Y}}
+\newcommand{\hZ}{\hat{Z}}
+\newcommand{\htZ}{\hat{\tilde{Z}}}
+\newcommand{\hm}{\hat{m}}
+\renewcommand{\d}[1]{\partial_{#1}}
+\newcommand{\Ve}{V^{\eps}}
+\newcommand{\ue}{u^{\eps}}
+\newcommand{\me}{m^{\eps}}
+\newcommand{\Xie}{X^{i,\eps}}
+\newcommand{\aie}{\alpha^{i,\eps}}
+\renewcommand{\ae}{\alpha^{\eps}}
+\newcommand{\Vo}{V^{0}}
+\newcommand{\uo}{u^{0}}
+\newcommand{\mo}{m^{0}}
+\newcommand{\Xio}{X^{i,0}}
+\newcommand{\aio}{\alpha^{i,0}}
+\newcommand{\ao}{\alpha^{0}}
+\newcommand{\du}{ \delta^{u,\eps}}
+\newcommand{\dm}{ \delta^{m,\eps}}
+\newcommand{\duo}{ \delta^{u}}
+\newcommand{\dmo}{ \delta^{m}}
+\newcommand{\mC}{\mathcal}
+
+
+\renewcommand{\div}{\text{div}}
+\newcommand{\ind}{\mathbf{1}}
+
+\title{MATH 53 Note: 04/04/2013}
+\author{Saran Ahuja}
+                                       
+\begin{document}
+\maketitle
+
+\noindent Linear $n^{th}$ order ODE is the ODE of the form 
+$$ y^{(n)}(t)  + a_{n-1}(t)y^{n-1}(t) + \dots + a_{1}(t)y'(t) + a_{0}(t)y(t) = b(t) $$
+where $a_{n-1}(t),\dots,a_{0}(t),b(t)$ is given. They are terms involving constant, $t$, but NO $y(t)$ in there. When $b(t) = 0$, it's called homogeneous linear ODE, otherwise it is called inhomogeneous linear ODE.
+
+Linear first order ODE is simply the ODE of the form
+$$ y'(t) + a(t)y(t) = b(t) $$
+Note that there is no $y$ in the terms $a(t),b(t)$. 
+ 
+\begin{example} Classify the following ODEs
+\begin{enumerate}
+	\item $y' = e^{-t} + y$
+	\item $y' = y(y+2)$
+	\item $y' = (\ln y) e^{t}$
+	\item $y' = k(T-y)$ 
+	\item $y' = 3y$ 
+\end{enumerate}
+(1),(4) are inhomogeneous linear ODE, (5) is homogeneous linear ODE, (2),(3) are non-linear ODE.
+\end{example}
+
+In this note, we will solve the linear first order ODE with constant coefficient, i.e. $a(t) = a$.  Consider the ODE
+$$ y'(t) + ay(t) = b(t) $$
+We would like to make the left-hand side (LHS) to look like terms in the product rule. To do that we multiply both sides by $v(t)$ (to be determined), then we get
+$$ v(t) y'(t) + av(t) y(t) = v(t) b(t) $$
+We want to make the LHS equal to
+$$ (v(t)y(t))' = v(t)y'(t) + v'(t)y(t) $$
+Working backwards, we want to choose $v(t)$ that satisfies
+$$ v'(t) = av(t)  $$
+One such $v(t)$ is simply
+$$ v(t) = e^{at} $$
+$v(t)$ is called an integrating factor. By letting $v(t) = e^{at}$, we now get
+$$ e^{at}y'(t) +a e^{at}y(t) = e^{at}b(t) $$
+From the product rule, we can group the LHS and get 
+$$ (e^{at}y(t))' = e^{at}b(t) $$
+so
+$$ e^{at}y(t) = \int e^{at}b(t) + C $$
+Thus,
+$$ y(t) = e^{-at}\int e^{at}b(t) + C $$
+
+\begin{example} Solve $u'(t) + 5u(t) = 0$. From the discussion above, one see that the integrating factor is simply $e^{5t}$. Multiply both sides with that, we get
+$$ e^{5t}u'(t) + 5e^{5t}u(t) = 0 $$
+The product rule tells us the LHS is just
+$$ (e^{5t}u(t))' = 0 $$
+Integrating both sides, we get
+$$ e^{5t}u(t) = C $$
+so 
+$$ u(t) = Ce^{-5t} $$
+\end{example}
+
+\ni\tf{COMMON MISTAKES} (1) When multiply the whole equation with an integrating factor, don't forget to multiply the RHS as well. \\
+(2) Don't forget the constant when integrating both side. \\
+
+\begin{example} $u' +2u = t, u(0) = 3/4$. The integrating factor is simply $e^{2t}$ and the ODE becomes
+$$ (e^{2t}u(t))' = te^{2t} $$
+Don't forget the $e^{2t}$ on the RHS. Integrating both side, we get
+$$ e^{2t}u(t) = \int te^{2t}dt + C $$
+We need to use integration by part to deal with the integral on the RHS
+$$ \int t e^{2t} dt = \int t d(\frac{e^{2t}}{2}) = \frac{te^{2t}}{2} - \int \frac{e^{2t}}{2} dt = \frac{te^{2t}}{2}-\frac{e^{2t}}{4}  $$
+so 
+$$ e^{2t}u(t)  = \frac{te^{2t}}{2}-\frac{e^{2t}}{4}  + C$$
+or 
+$$ u(t) = \frac{t}{2}-\frac{1}{4}  + Ce^{-2t} $$
+Plug in $t=0$ and use the given assumption that $u(0) = 3/4$, we get
+$$ 3/4 = u(0) = -1/4 + C ,\qquad \Rightarrow C = 1 $$
+so the solution is
+$$ u(t) =  \frac{t}{2}-\frac{1}{4}  + e^{-2t} $$
+\end{example}
+
+\vspace{0.2in}
+\section{Directional Field}
+Directional field is the plot to visualize the dynamic of the solution of the ODE. The horizontal axis is $t$ and the vertical axis is $u$. The plot at point $(t_{0},u_{0})$ is the slope represents $u'(t)$ when $u(t)=u_{0}$. That is, given the ODE, we plug in $t=t_{0}, u(t) = u_{0}$ and find $u'(t_{0})$. We then draw the slope represents that values. For instance, when $u'(t) = 0$, we draw the horizontal segment to represent the fact that $u$ is unchanged (since $u'(t) = 0$). When $u'(t)$ is positive, we draw an upward segment to represent that fact that $u$ is moving up (since $u'(t)$ is positive). 
+
+\begin{example} Draw the directional derivative of $u' = u(u-3) $
+
+Note that when $u(t_{0}) = 0$ or 3, $u'(t) = 0$, so we get the flat line at those values. Try plugging $u = 0.5,1,1,5,2,$, we see that $u'(t)$ is negative and is independent of $t$, so we get downward sloping. See figure 1.1.13 for the complete plot.   
+
+\end{example}
+
+
+
+ 
+
+
+
+
+
+
+\end{document}  
